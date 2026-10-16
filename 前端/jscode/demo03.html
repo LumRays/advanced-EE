@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        let obj = {};
+        obj.name = "陈平安";
+        obj.age = 18;
+        console.log(obj);
+        let obj2 = new Object();
+
+        let student = {
+            "name": "李逍遥",
+            "age": 18,
+            "id": 56,
+            sayHello: function() {
+                console.log("hello");
+            }
+        };
+        student["gender"] = "男";
+        console.log(typeof student);
+        console.log(student);
+        student.sayHello();
+        
+
+    </script>
+</body>
+</html>

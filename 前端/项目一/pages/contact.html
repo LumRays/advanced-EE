@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熊出没 - 联系我们</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../image/logo.png" alt="熊出没">
+            <span>熊出没</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="characters.html">主角介绍</a></li>
+            <li><a href="gallery.html">图库</a></li>
+            <li><a href="movies.html">电影系列</a></li>
+            <li><a href="contact.html" class="active">联系我们</a></li>
+            <li><a href="links.html">友情链接</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h2>联系我们</h2>
+        
+        <div class="contact-info">
+            <p><strong>公司名称：</strong>熊出没动画制作有限公司</p>
+            <p><strong>联系电话：</strong><span class="phone">400-888-8888</span></p>
+            <p><strong>电子邮箱：</strong>contact@xiongmochu.com</p>
+            <p><strong>公司地址：</strong>北京市动画梦工厂</p>
+            <p><strong>工作时间：</strong>周一至周五 9:00-18:00</p>
+        </div>
+
+        <form>
+            <h3>给我们留言</h3>
+            
+            <div class="form-group">
+                <label for="name">您的姓名</label>
+                <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">电子邮箱</label>
+                <input type="email" id="email" name="email" placeholder="请输入您的邮箱" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">联系电话</label>
+                <input type="tel" id="phone" name="phone" placeholder="请输入您的电话">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">留言内容</label>
+                <textarea id="message" name="message" placeholder="请输入您想说的话..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">提交留言</button>
+            <button type="button" class="close-btn">关闭本页</button>
+        </form>
+    </div>
+
+    <div class="music-player">
+        <button id="musicBtn" class="music-btn">🎵 播放音乐</button>
+        <audio id="bgMusic" src="../music/xcm.mp3" loop></audio>
+    </div>
+
+    <footer>
+        <p>© 2026 熊出没官方网站. 保留所有权利.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

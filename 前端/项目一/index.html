@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熊出没 - 首页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="image/logo.png" alt="熊出没">
+            <span>熊出没</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">首页</a></li>
+            <li><a href="pages/characters.html">主角介绍</a></li>
+            <li><a href="pages/gallery.html">图库</a></li>
+            <li><a href="pages/movies.html">电影系列</a></li>
+            <li><a href="pages/contact.html">联系我们</a></li>
+            <li><a href="pages/links.html">友情链接</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="hero">
+            <img src="image/hero.jpg" alt="熊出没">
+            <div class="hero-content">
+                <h1>熊出没</h1>
+                <p>一部充满欢乐与冒险的国产动画</p>
+                <button class="cta-btn" onclick="location.href='pages/characters.html'">了解更多</button>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <img src="image/bear1.png" alt="熊大">
+                <h3>熊大</h3>
+                <p>聪明勇敢的森林守护者</p>
+            </div>
+            <div class="feature-card">
+                <img src="image/bear2.png" alt="熊二">
+                <h3>熊二</h3>
+                <p>憨厚可爱的吃货小熊</p>
+            </div>
+            <div class="feature-card">
+                <img src="image/b光头强.png" alt="光头强">
+                <h3>光头强</h3>
+                <p>搞笑逗趣的伐木工</p>
+            </div>
+        </div>
+
+        <div class="news-section">
+            <h2>最新动态</h2>
+            <div class="news-list">
+                <div class="news-item">
+                    <img src="image/news1.jpg" alt="新闻1">
+                    <h4>熊出没·年年有熊 热映中</h4>
+                    <p>最新电影正在全国热映，精彩不容错过！</p>
+                </div>
+                <div class="news-item">
+                    <img src="image/news2.jpg" alt="新闻2">
+                    <h4>全新动画剧集上线</h4>
+                    <p>熊出没之神奇宝物第二季开播啦！</p>
+                </div>
+                <div class="news-item">
+                    <img src="image/news3.jpg" alt="新闻3">
+                    <h4>周边商品火热发售</h4>
+                    <p>正版授权周边，快来抢购！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="music-player">
+        <button id="musicBtn" class="music-btn">🎵 播放音乐</button>
+        <audio id="bgMusic" src="music/xcm.mp3" loop></audio>
+    </div>
+
+    <footer>
+        <p>© 2026 熊出没官方网站. 保留所有权利.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

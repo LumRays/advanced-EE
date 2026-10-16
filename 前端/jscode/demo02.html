@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a = 10;
+        console.log(typeof a);
+        
+        let age = 20;
+        let age1 = "20";
+        let age2 = 20;
+        console.log(age == age1);
+        console.log(age === age1);
+        console.log(age == age2);
+
+        let arr = new Array();
+        console.log(typeof arr);
+
+        let arr2 = [];
+        console.log(typeof arr2)
+
+        let arr3 = [1, 2, 3, "apple", "panda"];
+        console.log(arr3);
+
+        arr2[5] = "talk";
+        console.log(arr2)
+
+        arr3.splice(2, 1);
+        console.log(arr3);
+
+        function test() {
+            console.log("Hello JavaScript");
+            console.log("Hello JavaScript");
+        }
+        test();
+
+        function add(a, b) {
+            let ret = a + b;
+            console.log(a + "+" + b + "=" + ret);
+            return ret;
+        }
+        add(5, 3);
+        add("aa", "bb");
+        add("ab", 8);
+        add("a");
+        add(7);
+
+        let sum = function(a, b) {
+            return a + b;
+        }
+        console.log(typeof sum);
+        console.log(sum(7, 6));
+
+    </script>
+</body>
+</html>
