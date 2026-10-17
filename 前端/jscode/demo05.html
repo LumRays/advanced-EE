@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    
+<div style="font-size: 36px;"><h1>一级标题</h1></div>
+<p><a href="https://www.bing.com/?mkt=zh-cn&mkt=zh-CN" id="">必应</a></p>
+<ol>
+    <li>List item 1</li>
+    <li>List item 2</li>
+    <li>List item 3</li>
+</ol>
+<img src="../项目一/image/b光头强.png" alt="">
+<script>
+    let text = $("div").text();
+    console.log(text);
+    $(function() {
+        // 获取属性
+        let href = $("p a").attr("href");
+        console.log(href);
+    });
+    // 获取样式
+    let fontSize = $("div").css("font-size");
+    console.log(fontSize);
+    // 设置样式
+    $("div").css("font-size", "16px");
+    $("ol").append("append");
+    $("ol").prepend("prepend");
+    $("ol").after("after");
+    $("ol").before("before");
+
+</script>
+
+</body>
+</html>
