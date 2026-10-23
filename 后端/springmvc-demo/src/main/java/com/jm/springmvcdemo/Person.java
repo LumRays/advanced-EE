@@ -38,4 +38,14 @@ public class Person {
                 ", gender=" + gender +
                 '}';
     }
+
+    public Person(String name, Integer gender, Integer age) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    public Person() {
+
+    }
 }
