@@ -38,4 +38,23 @@ public class ResponseController {
         return "设置状态码成功!";
     }
 
+    @ResponseBody
+    @RequestMapping("/setContentType")
+    public String setContentType() {
+        return "{\"OK\":true";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/setContentType2", produces = "application/json")
+    public String setContentType2() {
+        return "{\"OK\":true}";
+    }
+
+    @ResponseBody
+    @RequestMapping("/setHeader")
+    public String setHeader(HttpServletResponse response) {
+        response.setHeader("My-Header", "myHeader");
+        return "设置 Header 成功!";
+    }
+
 }
