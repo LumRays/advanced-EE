@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: #fff;
+            padding: 40px 45px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            width: 340px;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 30px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 11px 14px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #667eea;
+        }
+
+        input[type="button"] {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        input[type="button"]:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>用户登录</h1>
+
+        <label>用户名：</label>
+        <input name="userName" type="text" id="userName">
+
+        <label>密码：</label>
+        <input name="password" type="password" id="password">
+
+        <input type="button" value="登录" onclick="login()">
+    </div>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        function login() {
+            let userName = $("#userName").val();
+            let password = $("#password").val();
+
+            // 后端真实的登录接口地址
+            $.ajax({
+                url: "/user/login",
+                type: "POST",
+                data: { userName: userName, password: password },
+                success: function (result) {
+                    // 登录成功，保存用户名并跳转
+                    if (result) {
+                        // 页面跳转
+                        window.location.href = "index.html";
+                    } else {
+                        alert("账号或密码错误!");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

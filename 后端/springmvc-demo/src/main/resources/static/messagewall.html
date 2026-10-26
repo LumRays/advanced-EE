@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言墙</title>
+
+    <!-- 引入 jQuery（方案二） -->
+    <script src="js/jquery-3.7.1.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #56ccf2, #2f80ed);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .message-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            padding: 30px 28px;
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #d7e6f5;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            margin-bottom: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #2f80ed;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #56ccf2, #2f80ed);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 4px 12px rgba(47,128,237,0.5);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .message-list {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            padding: 20px 28px;
+            min-height: 120px;
+        }
+
+        .message-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #eef5fb;
+            line-height: 1.6;
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-item .who {
+            color: #2f80ed;
+            font-weight: bold;
+        }
+
+        .message-item .to {
+            color: #56ccf2;
+            font-weight: bold;
+        }
+
+        .message-item .content {
+            color: #333;
+        }
+
+        .empty-tip {
+            text-align: center;
+            color: #aac4e0;
+            padding: 30px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ 留言墙</h1>
+
+        <div class="message-card">
+            <label>谁：</label>
+            <input type="text" id="who" placeholder="例如：黑猫">
+
+            <label>对谁：</label>
+            <input type="text" id="to" placeholder="例如：白猫">
+
+            <label>说什么：</label>
+            <textarea id="content" placeholder="例如：喵～"></textarea>
+
+            <button class="submit-btn" onclick="submitMessage()">提交留言</button>
+        </div>
+
+        <div class="message-list" id="messageList"></div>
+    </div>
+
+    <script>
+        // 留言列表，字段和后端 MessageInfo 对齐：from / to / message
+        let messages = [];
+
+        // 渲染留言列表
+        function render() {
+            let list = document.getElementById("messageList");
+            if (messages.length === 0) {
+                list.innerHTML = '<div class="empty-tip">还没有留言，快来抢沙发～</div>';
+                return;
+            }
+
+            let html = "";
+            for (let i = messages.length - 1; i >= 0; i--) {
+                let m = messages[i];
+                html +=
+                    '<div class="message-item">' +
+                        '<span class="who">' + escapeHtml(m.from) + '</span>' +
+                        ' 对 ' +
+                        '<span class="to">' + escapeHtml(m.to) + '</span>' +
+                        ' 说：' +
+                        '<span class="content">' + escapeHtml(m.message) + '</span>' +
+                    '</div>';
+            }
+            list.innerHTML = html;
+        }
+
+        // 提交留言
+        function submitMessage() {
+            let who = document.getElementById("who").value.trim();
+            let to = document.getElementById("to").value.trim();
+            let content = document.getElementById("content").value.trim();
+
+            if (!who || !to || !content) {
+                alert("请填写完整：谁、对谁、说什么");
+                return;
+            }
+
+            $.ajax({
+                url: "/message/publish",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ "from": who, "to": to, "message": content }),
+                success: function (res) {
+                    if (res) {
+                        document.getElementById("who").value = "";
+                        document.getElementById("to").value = "";
+                        document.getElementById("content").value = "";
+                        loadList();   // 提交成功后重新拉取列表
+                    } else {
+                        alert("留言失败！");
+                    }
+                },
+                error: function (xhr) {
+                    alert("请求出错，状态码：" + xhr.status);
+                }
+            });
+        }
+
+        // 从后端加载历史留言
+        function loadList() {
+            $.ajax({
+                url: "/message/getList",
+                type: "GET",
+                success: function (list) {
+                    messages = list;
+                    render();
+                },
+                error: function (xhr) {
+                    alert("加载列表出错，状态码：" + xhr.status);
+                }
+            });
+        }
+
+        // 防止 XSS：转义特殊字符
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        // 页面打开时，先从后端加载留言列表
+        loadList();
+    </script>
+</body>
+</html>

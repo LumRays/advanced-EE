@@ -2,9 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录首页</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .welcome-box {
+            background: #fff;
+            padding: 50px 60px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .welcome-box p {
+            font-size: 22px;
+            color: #333;
+            margin: 0 0 10px;
+        }
+
+        .user-name {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #999;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #667eea;
+        }
+    </style>
 </head>
 <body>
-    这是首页!
+    <div class="welcome-box">
+        <p>欢迎回来，<span class="user-name" id="loginUser"></span>！</p>
+        <a href="login.html" onclick="logout()">退出登录</a>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "/user/getLoginUser",
+                type: "GET",
+                success: function (userName) {
+                    // user 是后端返回的当前登录用户
+                    $("#loginUser").text(userName);
+                },
+                error: function () {
+                    // 没登录，跳回登录页
+                    window.location.href = "login.html";
+                }
+            });
+        });
+
+        function logout() {
+            window.location.href = "login.html";
+        }
+    </script>
 </body>
 </html>
