@@ -76,5 +76,11 @@ td .width100{
     width: 200px;
 }
 
+/* visual polish only */
+:root{--navy:#183247;--teal:#2aa889;--line:#e5eeee;--muted:#71858d}body{margin:0;color:#23384a;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:linear-gradient(135deg,#f3f8f7,#f8fbfc)}.bookContainer{width:min(1180px,calc(100% - 40px));margin:42px auto}.bookContainer h2{margin:0 0 28px;color:var(--navy);font-size:30px;letter-spacing:1px}.bookContainer h2:before{content:"LIBRARY  /  ";color:var(--teal);font-size:12px;letter-spacing:2px;vertical-align:middle}.navbar-justify-between{align-items:center;padding:17px 20px;margin-bottom:16px;border:1px solid var(--line);border-radius:15px;background:#fff;box-shadow:0 8px 28px rgba(35,70,80,.05)}.btn-outline-info{margin-left:8px;border-color:#a8dfd1;color:#168b73;border-radius:9px;font-weight:700}.btn-outline-info:hover{border-color:var(--teal);background:var(--teal)}table{overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#fff;box-shadow:0 8px 28px rgba(35,70,80,.05)}th,td{border:0;border-bottom:1px solid #edf2f2;padding:16px 12px;font-size:13px}table thead tr{background:var(--navy);color:#f0fbf8}table tbody tr{background:#fff!important;transition:.18s}table tbody tr:hover{background:#f0faf7!important}.book-select{accent-color:var(--teal);zoom:120%}.bookContainer .op{width:auto;gap:15px;justify-content:center}.op a{color:#168f76;text-decoration:none}.op a:last-child{color:#d36f70}.pagination{margin-top:24px}.page-link{border-color:var(--line);color:#168f76}.page-item.active .page-link{background:var(--teal);border-color:var(--teal)}@media(max-width:800px){.bookContainer{width:calc(100% - 24px);margin:25px auto}.bookContainer h2{font-size:24px}table{display:block;overflow-x:auto;white-space:nowrap}}
 
 
+
+
+/* sunshine yellow + sky blue theme */
+:root{--navy:#24527a;--teal:#f2b632;--line:#dcecf6}body{background:linear-gradient(135deg,#e8f7ff,#fff9e7);color:#23415b}.bookContainer h2{color:#24527a}.bookContainer h2:before{color:#f2b632}.btn-outline-info{border-color:#f0cc68;color:#b27b08}.btn-outline-info:hover{border-color:#f2b632;background:#f2b632}table thead tr{background:#24527a}table tbody tr:hover{background:#fff9e7!important}.book-select{accent-color:#f2b632}.op a{color:#2b83b2}.page-link{color:#2b83b2}.page-item.active .page-link{background:#f2b632;border-color:#f2b632}

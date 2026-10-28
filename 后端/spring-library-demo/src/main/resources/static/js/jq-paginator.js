@@ -3,14 +3,14 @@
 
 'use strict'
 
-var $ = jQuery
+let $ = jQuery
 
 $.jqPaginator = function (el, options) {
   if (!(this instanceof $.jqPaginator)) {
     return new $.jqPaginator(el, options)
   }
 
-  var self = this
+  let self = this
 
   self.$container = $(el)
 
@@ -43,7 +43,7 @@ $.jqPaginator = function (el, options) {
   }
 
   self.verify = function () {
-    var opts = self.options
+    let opts = self.options
 
     if (!self.isNumber(opts.totalPages)) {
       throw new Error('[jqPaginator] type error: totalPages')
@@ -103,10 +103,10 @@ $.jqPaginator = function (el, options) {
   }
 
   self.renderHtml = function () {
-    var html = []
+    let html = []
 
-    var pages = self.getPages()
-    for (var i = 0, j = pages.length; i < j; i++) {
+    let pages = self.getPages()
+    for (let i = 0, j = pages.length; i < j; i++) {
       html.push(self.buildItem('page', pages[i]))
     }
 
@@ -128,7 +128,7 @@ $.jqPaginator = function (el, options) {
   }
 
   self.buildItem = function (type, pageData) {
-    var html = self.options[type]
+    let html = self.options[type]
       .replace(/{{page}}/g, pageData)
       .replace(/{{totalPages}}/g, self.options.totalPages)
       .replace(/{{totalCounts}}/g, self.options.totalCounts)
@@ -142,7 +142,7 @@ $.jqPaginator = function (el, options) {
   }
 
   self.setStatus = function () {
-    var options = self.options
+    let options = self.options
 
     if (!self.isEnable('first') || options.currentPage === 1) {
       $('[jp-role=first]', self.$container).addClass(options.disableClass)
@@ -162,21 +162,21 @@ $.jqPaginator = function (el, options) {
   }
 
   self.getPages = function () {
-    var pages = []
+    let pages = []
 
-    var visiblePages = self.options.visiblePages
+    let visiblePages = self.options.visiblePages
 
-    var currentPage = self.options.currentPage
+    let currentPage = self.options.currentPage
 
-    var totalPages = self.options.totalPages
+    let totalPages = self.options.totalPages
 
     if (visiblePages > totalPages) {
       visiblePages = totalPages
     }
 
-    var half = Math.floor(visiblePages / 2)
-    var start = currentPage - half + 1 - (visiblePages % 2)
-    var end = currentPage + half
+    let half = Math.floor(visiblePages / 2)
+    let start = currentPage - half + 1 - (visiblePages % 2)
+    let end = currentPage + half
 
     if (start < 1) {
       start = 1
@@ -187,7 +187,7 @@ $.jqPaginator = function (el, options) {
       start = 1 + totalPages - visiblePages
     }
 
-    var itPage = start
+    let itPage = start
     while (itPage <= end) {
       pages.push(itPage)
       itPage++
@@ -197,7 +197,7 @@ $.jqPaginator = function (el, options) {
   }
 
   self.isNumber = function (value) {
-    var type = typeof value
+    let type = typeof value
     return type === 'number' || type === 'undefined'
   }
 
@@ -233,16 +233,16 @@ $.jqPaginator = function (el, options) {
   }
 
   self.bindEvents = function () {
-    var opts = self.options
+    let opts = self.options
 
     self.$container.off()
     self.$container.on('click', '[jp-role]', function () {
-      var $el = $(this)
+      let $el = $(this)
       if ($el.hasClass(opts.disableClass) || $el.hasClass(opts.activeClass)) {
         return
       }
 
-      var pageIndex = +$el.attr('jp-data')
+      let pageIndex = +$el.attr('jp-data')
       if (self.fireEvent(pageIndex, 'change')) {
         self.switchPage(pageIndex)
       }
@@ -272,12 +272,12 @@ $.jqPaginator.defaultOptions = {
 }
 
 $.fn.jqPaginator = function () {
-  var self = this
+  let self = this
 
-  var args = Array.prototype.slice.call(arguments)
+  let args = Array.prototype.slice.call(arguments)
 
   if (typeof args[0] === 'string') {
-    var $instance = $(self).data('jqPaginator')
+    let $instance = $(self).data('jqPaginator')
     if (!$instance) {
       throw new Error('[jqPaginator] the element is not instantiated')
     } else {

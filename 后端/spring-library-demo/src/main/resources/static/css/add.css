@@ -17,3 +17,9 @@
     width: 150px;
     font-size: 1.25rem;
 }
+
+/* visual polish only */
+:root{--navy:#183247;--teal:#2aa889;--line:#dce9e7}body{margin:0;color:#23384a;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:linear-gradient(135deg,#f1f8f6,#f5f9fb)}.container{width:min(700px,calc(100% - 32px));margin:55px auto;padding:36px 45px;border:1px solid rgba(42,168,137,.12);border-radius:21px;background:rgba(255,255,255,.94);box-shadow:0 20px 55px rgba(35,70,80,.1)}.container h2{display:flex;align-items:center;gap:10px;margin:0 0 28px;color:var(--navy);font-size:28px}.container h2 svg{fill:var(--teal)}.form-group{margin-top:20px;font-size:14px}.form-group label{display:block;margin-bottom:8px;color:#5b717c;font-weight:700}.form-control,.custom-select{height:47px;border:1px solid var(--line);border-radius:10px;box-shadow:none}.form-control:focus,.custom-select:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(42,168,137,.1)}.form-group[style]{margin-top:30px!important}.form-group .btn-lg{width:130px;height:46px;border:0;border-radius:10px;font-size:14px}.form-group .btn-info{background:linear-gradient(135deg,#35b798,#209577)}.form-group .btn-secondary{background:#edf2f3;color:#5d6d75}@media(max-width:600px){.container{margin:22px auto;padding:28px 22px}.container h2{font-size:24px}}
+
+/* sunshine yellow + sky blue theme */
+:root{--navy:#24527a;--teal:#f2b632;--line:#d8eaf4}body{background:linear-gradient(135deg,#e8f7ff,#fff9e7);color:#23415b}.container h2{color:#24527a}.container h2 svg{fill:#f2b632}.form-control:focus,.custom-select:focus{border-color:#f2b632;box-shadow:0 0 0 4px rgba(242,182,50,.16)}.form-group .btn-info{background:linear-gradient(135deg,#f7c84b,#e5a51f)}
