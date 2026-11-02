@@ -1,13 +1,16 @@
 package com.jm.springiocdemo;
 
+import ch.qos.logback.core.hook.DefaultShutdownHook;
 import com.jm.springiocdemo.component.UserComponent;
 import com.jm.springiocdemo.configuration.UserConfiguration;
 import com.jm.springiocdemo.controller.UserController;
+import com.jm.springiocdemo.entity.UserInfo;
 import com.jm.springiocdemo.repository.UserRepository;
 import com.jm.springiocdemo.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import tools.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class SpringIocDemoApplication {
@@ -49,6 +52,16 @@ public class SpringIocDemoApplication {
         UserComponent bean5 = context.getBean(UserComponent.class);
         System.out.println(bean5.test());
         System.out.println(bean5);
+
+        System.out.println("==================================");
+
+        DefaultShutdownHook bean6 = context.getBean(DefaultShutdownHook.class);
+        System.out.println(bean6);
+
+        System.out.println("==================================");
+
+        UserInfo bean7 = context.getBean("userInfo2", UserInfo.class);
+        System.out.println(bean7);
 
     }
 
