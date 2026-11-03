@@ -1,0 +1,11 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    url: testurl
+    username: root
+    password: root
+string:
+  str1: Hello \n Spring Boot.
+  str2: 'Hello \n Spring Boot.'
+  str3: "Hello \n Spring Boot."
