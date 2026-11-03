@@ -4,6 +4,7 @@ import ch.qos.logback.core.hook.DefaultShutdownHook;
 import com.jm.springiocdemo.entity.UserInfo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class BeanConfig {
@@ -13,12 +14,14 @@ public class BeanConfig {
         return new DefaultShutdownHook();
     }
 
-    @Bean
+    @Bean("userInfo1")
+    //@Primary
     public UserInfo userInfo() {
         return new UserInfo("张三", 18);
     }
 
     @Bean
+    //@Primary
     public UserInfo userInfo2() {
         return new UserInfo("李四", 26);
     }

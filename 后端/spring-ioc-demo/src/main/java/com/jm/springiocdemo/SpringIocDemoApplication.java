@@ -63,6 +63,14 @@ public class SpringIocDemoApplication {
         UserInfo bean7 = context.getBean("userInfo2", UserInfo.class);
         System.out.println(bean7);
 
+        System.out.println("===============DI===============");
+
+        UserController bean8 = context.getBean(UserController.class);
+        bean8.test();
+
+        UserService bean9 = context.getBean(UserService.class);
+        bean9.test();
+
     }
 
 }

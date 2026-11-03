@@ -1,14 +1,14 @@
 package com.jm.springlibrarydemo.dao;
 
 import com.jm.springlibrarydemo.entity.BookInfo;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Component
+@Repository
 public class BookDao {
 
     public List<BookInfo> mockData() {
