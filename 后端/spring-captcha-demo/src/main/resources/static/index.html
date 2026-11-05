@@ -48,8 +48,42 @@
     }
     captcha.addEventListener('click', refreshCaptcha);
     document.getElementById('refreshCaptcha').addEventListener('click', refreshCaptcha);
-    document.getElementById('checkCaptcha').addEventListener('click', function () {
-      alert('验证码校验');
+    document.getElementById('checkCaptcha').addEventListener('click', async function () {
+      const button = this;
+      const code = document.getElementById('inputCaptcha').value.trim();
+      if (!code) {
+        alert('请先输入验证码');
+        document.getElementById('inputCaptcha').focus();
+        return;
+      }
+
+      button.disabled = true;
+      try {
+        const body = new URLSearchParams();
+        body.set('captcha', code);
+        const response = await fetch('/captcha/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: body.toString()
+        });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const result = (await response.text()).trim();
+        if (result === 'true') {
+          window.location.href = 'success.html';
+        } else if (result === 'false') {
+          alert('验证码错误');
+          refreshCaptcha();
+          document.getElementById('inputCaptcha').value = '';
+          document.getElementById('inputCaptcha').focus();
+        } else {
+          throw new Error('后端返回内容不是 true 或 false：' + result);
+        }
+      } catch (error) {
+        console.error('验证码校验请求失败：', error);
+        alert('验证码校验请求失败，请检查服务是否启动以及接口地址是否正确。');
+      } finally {
+        button.disabled = false;
+      }
     });
     document.getElementById('inputCaptcha').addEventListener('keydown', function (event) {
       if (event.key === 'Enter') document.getElementById('checkCaptcha').click();
