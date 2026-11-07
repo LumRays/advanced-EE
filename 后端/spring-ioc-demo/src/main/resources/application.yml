@@ -9,3 +9,13 @@ string:
   str1: Hello \n Spring Boot.
   str2: 'Hello \n Spring Boot.'
   str3: "Hello \n Spring Boot."
+logging:
+  level:
+    root: info
+  file:
+#    path: logger/
+    name: logger/spring.log
+  logback:
+    rolling policy:
+      max-file-size: 1KB
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i
