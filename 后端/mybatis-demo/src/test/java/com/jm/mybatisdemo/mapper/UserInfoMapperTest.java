@@ -34,4 +34,16 @@ class UserInfoMapperTest {
     void tearDown() {
         System.out.println("每一个测试用例执行之后都要执行 tearDown() !");
     }
+
+    @Test
+    void selectById() {
+        UserInfo userInfo = userInfoMapper.selectById(2);
+        System.out.println(userInfo);
+    }
+
+    @Test
+    void selectByAgeAndGender() {
+        UserInfo userInfo = userInfoMapper.selectByAgeAndGender(18, 0);
+        System.out.println(userInfo);
+    }
 }

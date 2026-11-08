@@ -12,4 +12,10 @@ public interface UserInfoMapper {
     @Select("select * from user_info")
     List<UserInfo> selectAll();
 
+    @Select("select * from user_info where id = #{id}")
+    UserInfo selectById(Integer id);
+
+    @Select("select * from user_info WHERE age = #{age} AND gender = #{gender};")
+    UserInfo selectByAgeAndGender(Integer age, Integer gender);
+
 }
