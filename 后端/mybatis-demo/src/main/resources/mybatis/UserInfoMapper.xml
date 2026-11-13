@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jm.mybatisdemo.mapper.UserInfoXmlMapper">
+<!--    <resultMap id="BaseMapXml" type="com.jm.mybatisdemo.entity.UserInfo">-->
+<!--        <id property="id" column="id"></id>-->
+<!--        <result property="deleteFlag" column="delete_flag"></result>-->
+<!--        <result property="createTime" column="create_time"></result>-->
+<!--        <result property="updateTime" column="update_time"></result>-->
+<!--    </resultMap>-->
+    <select id="selectAll" resultType="com.jm.mybatisdemo.entity.UserInfo">
+        select * from user_info
+    </select>
+    <select id="selectById" resultType="com.jm.mybatisdemo.entity.UserInfo">
+        select * from user_info where id = #{id}
+    </select>
+    <select id="selectByAgeAndGender" resultType="com.jm.mybatisdemo.entity.UserInfo">
+        select * from user_info WHERE age = #{age} AND gender = #{gender}
+    </select>
+    <select id="selectByAgeAndGender2" resultType="com.jm.mybatisdemo.entity.UserInfo">
+        select * from user_info WHERE age = #{age} AND gender = #{gen}
+    </select>
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info (username, password, age, gender) values (#{username}, #{password}, #{age}, #{gender})
+    </insert>
+    <insert id="insertUser2">
+        insert into user_info (username, password, age, gender) values (#{userInfo.username}, #{userInfo.password}, #{userInfo.age}, #{userInfo.gender})
+    </insert>
+    <delete id="deleteUserById">
+        delete from user_info where id = #{id}
+    </delete>
+    <update id="updateUserByPassword">
+        update user_info set age = #{age} where id = #{id}
+    </update>
+</mapper>
