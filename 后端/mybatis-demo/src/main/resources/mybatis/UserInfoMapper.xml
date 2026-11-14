@@ -31,4 +31,73 @@
     <update id="updateUserByPassword">
         update user_info set age = #{age} where id = #{id}
     </update>
+    <insert id="insertByCondition">
+        insert into user_info
+                               <trim prefixOverrides="," prefix="(" suffix=")">
+                                   <if test="username != null">
+                                       username
+                                   </if>
+                                   <if test="password != null">
+                                       , password
+                                   </if>
+                                   <if test="age != null">
+                                       , age
+                                   </if>
+                                   <if test="gender != null">
+                                       , gender
+                                   </if>
+                               </trim>
+
+                                    values
+                                <trim prefixOverrides="," prefix="(" suffix=")">
+                                    <if test="username != null">
+                                        #{username}
+                                    </if>
+                                    <if test="password != null">
+                                        , #{password}
+                                    </if>
+                                    <if test="age != null">
+                                        , #{age}
+                                    </if>
+                                    <if test="gender != null">
+                                        , #{gender}
+                                    </if>
+                                </trim>
+
+    </insert>
+    <select id="selectByCondition" resultType="com.jm.mybatisdemo.entity.UserInfo">
+        select * from user_info
+        <where>
+            <if test="age != null">
+                age = #{age}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+    <update id="updateByCondition">
+        update user_info
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+    <delete id="deleteByIds">
+        delete from user_info
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

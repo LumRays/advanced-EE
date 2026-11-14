@@ -85,4 +85,16 @@ class UserInfoMapperTest {
         Integer result = userInfoMapper.updateUserByPassword(userInfo);
         log.info("影响行数: {}", result);
     }
+
+    @Test
+    void selectUserByOrder() {
+        List<UserInfo> userInfos = userInfoMapper.selectUserByOrder("desc");
+        userInfos.forEach(System.out::println);
+    }
+
+    @Test
+    void selectUserByLikePassword() {
+        userInfoMapper.selectUserByLikePassword("g").forEach(System.out::println);
+    }
+
 }

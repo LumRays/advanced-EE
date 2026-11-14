@@ -37,4 +37,10 @@ public interface UserInfoMapper {
     @Update("update user_info set password = #{password} where id = #{id}")
     Integer updateUserByPassword(UserInfo userInfo);
 
+    @Select("select * from user_info order by id ${order}")
+    List<UserInfo> selectUserByOrder(String order);
+
+    @Select("select * from user_info WHERE password LIKE CONCAT('%',#{likePassword},'%'); ")
+    List<UserInfo> selectUserByLikePassword(String likePassword);
+
 }

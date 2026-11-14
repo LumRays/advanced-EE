@@ -24,4 +24,12 @@ public interface UserInfoXmlMapper {
 
     Integer updateUserByPassword(UserInfo userInfo);
 
+    Integer insertByCondition(UserInfo userInfo);
+
+    List<UserInfo> selectByCondition(UserInfo userInfo);
+
+    Integer updateByCondition(UserInfo userInfo);
+
+    void deleteByIds(List<Integer> ids);
+
 }

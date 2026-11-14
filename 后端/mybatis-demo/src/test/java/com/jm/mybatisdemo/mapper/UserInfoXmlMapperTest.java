@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
@@ -90,6 +92,49 @@ class UserInfoXmlMapperTest {
         userInfo.setId(11);
         Integer result = userInfoXmlMapper.updateUserByPassword(userInfo);
         log.info("影响行数: {}", result);
+
+    }
+
+    @Test
+    void insertByCondition() {
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("敖隐");
+        userInfo.setPassword("dragon");
+        userInfo.setAge(6);
+        //userInfo.setGender(1);
+        Integer result = userInfoXmlMapper.insertByCondition(userInfo);
+        log.info("影响行数: " + result);
+
+    }
+
+    @Test
+    void selectByCondition() {
+
+        UserInfo userInfo = new UserInfo();
+        //userInfo.setAge(12);
+        userInfo.setGender(1);
+        List<UserInfo> result = userInfoXmlMapper.selectByCondition(userInfo);
+        result.forEach(System.out::println);
+
+    }
+
+    @Test
+    void updateByCondition() {
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("小龙人");
+        userInfo.setId(10);
+        userInfo.setAge(6);
+        userInfo.setGender(2);
+        userInfoXmlMapper.updateByCondition(userInfo);
+
+    }
+
+    @Test
+    void deleteByIds() {
+
+        userInfoXmlMapper.deleteByIds(List.of(2, 10));
 
     }
 
