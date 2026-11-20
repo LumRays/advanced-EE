@@ -1,4 +1,4 @@
-package com.jm.springmvcdemo;
+package com.jm.springmvcdemo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

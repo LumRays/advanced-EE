@@ -1,8 +1,8 @@
 package com.jm.springmvcdemo;
 
+import com.jm.springmvcdemo.entity.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import tools.jackson.databind.MappingIterator;
 import tools.jackson.databind.ObjectMapper;
 
 @SpringBootTest

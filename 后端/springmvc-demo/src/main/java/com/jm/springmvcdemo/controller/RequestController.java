@@ -1,5 +1,6 @@
-package com.jm.springmvcdemo;
+package com.jm.springmvcdemo.controller;
 
+import com.jm.springmvcdemo.entity.Person;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

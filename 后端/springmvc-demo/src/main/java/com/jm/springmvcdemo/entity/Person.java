@@ -1,4 +1,4 @@
-package com.jm.springmvcdemo;
+package com.jm.springmvcdemo.entity;
 
 public class Person {
 
