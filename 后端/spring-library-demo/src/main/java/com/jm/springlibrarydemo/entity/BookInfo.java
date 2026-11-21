@@ -3,6 +3,7 @@ package com.jm.springlibrarydemo.entity;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 public class BookInfo {
@@ -23,5 +24,9 @@ public class BookInfo {
     private Integer status;
 
     private String statusCN;
+
+    private Date createTime;
+
+    private Date updateTime;
 
 }

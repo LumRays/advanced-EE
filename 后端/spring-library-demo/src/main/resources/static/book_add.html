@@ -64,8 +64,23 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
         function add() {
-            alert("添加成功");
-            location.href = "book_list.html";
+            let bookData = $("#addBook").serialize();
+            $.ajax({
+                type: "post",
+                url: "/book/addBook",
+                data: bookData,
+                success: function (result) {
+                    if (result === "") {
+                        alert("添加成功");
+                        location.href = "book_list.html";
+                    } else {
+                        alert(result || "添加失败，请检查图书信息后重试");
+                    }
+                },
+                error: function () {
+                    alert("添加失败，请稍后重试");
+                }
+            });
         }
     </script>
 </body>
