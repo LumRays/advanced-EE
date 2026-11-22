@@ -13,4 +13,6 @@ public class PageResult<T> {
 
     private Integer count;
 
+    private PageRequest pageRequest;
+
 }

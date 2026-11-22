@@ -23,4 +23,11 @@ public interface BookMapper {
     @Select("select count(1) from book_info where status != 0")
     Integer count();
 
+    @Select("select * from book_info where id = #{id}")
+    BookInfo queryBookById(Integer id);
+
+    Integer updateBookById(BookInfo bookInfo);
+
+    Integer batchDeleteBook(List<Integer> ids);
+
 }

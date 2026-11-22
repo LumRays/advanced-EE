@@ -6,9 +6,11 @@ import com.jm.springlibrarydemo.entity.PageResult;
 import com.jm.springlibrarydemo.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -56,6 +58,46 @@ public class BookController {
         PageResult result = bookService.getListByPage(pageRequest);
         return result;
 
+    }
+
+    @RequestMapping("/queryBookById")
+    public BookInfo queryBookById(Integer bookId) {
+
+        log.info("查询图书详情, bookId: {}", bookId);
+        if (bookId == null || bookId < 0) {
+            return null;
+        }
+        BookInfo bookInfo = bookService.queryBookById(bookId);
+        return bookInfo;
+
+    }
+
+    @RequestMapping("/updateBook")
+    public String updateBook(BookInfo bookInfo) {
+
+        log.info("修改图书信息, bookInfo: {}", bookInfo);
+        if (bookInfo.getId() == null || bookInfo.getId() < 0) {
+            return "参数不合法,请进行校验!";
+        }
+        Integer result = bookService.updateBook(bookInfo);
+        return result == 1 ? "" : "数据更新失败!";
+
+    }
+
+    @RequestMapping("/batchDeleteBook")
+    public String batchDeleteBook(@RequestParam List<Integer> ids) {
+
+        log.info("批量删除图书, ids: {}", ids);
+        if (CollectionUtils.isEmpty(ids)) {
+            return "未选中需要删除的图书!";
+        }
+        try {
+            bookService.batchDeleteBook(ids);
+        } catch (Exception e) {
+            log.error("批量删除图书失败, e: ", e);
+            return "批量删除图书失败";
+        }
+        return "";
     }
 
 }

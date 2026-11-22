@@ -59,10 +59,47 @@
     </div>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
-        
+        $(function () {
+            $.ajax({
+                type: "get",
+                url: "/book/queryBookById" + location.search,
+                success: function (book) {
+                    if (book != null) {
+                        $("#bookId").val(book.id);
+                        $("#bookName").val(book.bookName);
+                        $("#bookAuthor").val(book.author);
+                        $("#bookStock").val(book.count);
+                        $("#bookPrice").val(book.price);
+                        $("#bookPublisher").val(book.publish);
+                        $("#bookStatus").val(book.status);
+                    } else {
+                        alert("没有找到这本图书");
+                    }
+                },
+                error: function () {
+                    alert("获取图书信息失败，请稍后重试");
+                }
+            });
+        });
+
+
         function update() {
-            alert("更新成功");
-            location.href = "book_list.html"
+            $.ajax({
+                type: "post",
+                url: "/book/updateBook",
+                data: $("#updateBook").serialize(),
+                success: function (result) {
+                    if (result === "") {
+                        alert("修改成功");
+                        location.href = "book_list.html";
+                    } else {
+                        alert("修改失败：" + result);
+                    }
+                },
+                error: function () {
+                    alert("修改请求失败，请稍后重试");
+                }
+            });
         }
     </script>
 </body>

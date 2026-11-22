@@ -48,6 +48,11 @@
         </div>
         <script>
 
+            let queryCurrentPage = parseInt(new URLSearchParams(window.location.search).get("currentPage"), 10);
+            if (!Number.isInteger(queryCurrentPage) || queryCurrentPage < 1) {
+                queryCurrentPage = 1;
+            }
+
             function getBookList(currentPage) {
                 $.ajax({
                    type: "get",
@@ -74,10 +79,11 @@
                            finalHtml += '</div></td></tr>';
                        }
                        $("tbody").html(finalHtml || '<tr><td colspan="9">当前页暂无图书</td></tr>');
+                       let returnedPage = result.pageRequest && result.pageRequest.currentPage ? result.pageRequest.currentPage : currentPage;
                        $("#pageContainer").jqPaginator("option", {
                            totalCounts: result.count,
                            pageSize: 10,
-                           currentPage: currentPage
+                           currentPage: returnedPage
                        });
                    }
                 });
@@ -85,10 +91,10 @@
 
             //翻页信息
             $("#pageContainer").jqPaginator({
-                totalCounts: 1, // 初始化时使用，首个请求完成后由接口返回总数
+                totalCounts: 1000, // 初始化占位，确保URL页码可初始化，随后更新为接口总数
                 pageSize: 10,    //每页的个数
                 visiblePages: 5, //可视页数
-                currentPage: 1,  //当前页码
+                currentPage: queryCurrentPage,  //从URL读取当前页码
                 first: '<li class="page-item"><a class="page-link">首页</a></li>',
                 prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
                 next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
@@ -102,20 +108,48 @@
             function deleteBook(id) {
                 let isDelete = confirm("确认删除?");
                 if (isDelete) {
-                    //删除图书
-                    alert("删除成功");
+                    $.ajax({
+                        type: "post",
+                        url: "/book/updateBook",
+                        data: { id: id, status: 0 },
+                        success: function (result) {
+                            if (result === "") {
+                                getBookList(Number($(".page-item.active a").text()) || queryCurrentPage);
+                            } else {
+                                alert("删除失败：" + result);
+                            }
+                        },
+                        error: function () {
+                            alert("删除请求失败，请稍后重试");
+                        }
+                    });
                 }
             }
             function batchDelete() {
                 let isDelete = confirm("确认批量删除?");
                 if (isDelete) {
-                    //获取复选框的id
                     let ids = [];
                     $("input:checkbox[name='selectBook']:checked").each(function () {
                         ids.push($(this).val());
                     });
-                    console.log(ids);
-                    alert("批量删除成功");
+                    if (ids.length === 0) {
+                        alert("请先选择要删除的图书");
+                        return;
+                    }
+                    let currentPage = Number($(".page-item.active a").text()) || queryCurrentPage;
+                    $.ajax({
+                        type: "post",
+                        url: "/book/batchDeleteBook",
+                        traditional: true,
+                        data: { ids: ids },
+                        success: function () {
+                            alert("批量删除请求已完成");
+                            getBookList(currentPage);
+                        },
+                        error: function () {
+                            alert("批量删除失败，请稍后重试");
+                        }
+                    });
                 }
             }
 
